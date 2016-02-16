@@ -15,6 +15,7 @@ public class Game : MonoBehaviour
 	public tk2dSprite[,] spriteBoard = new tk2dSprite[10, 10];
 	public Transform parentsBoard;
 	public GameObject cellMode;
+	public bool lockSelectBlock;
 	// Use this for initialization
 	void Start ()
 	{
@@ -52,14 +53,14 @@ public class Game : MonoBehaviour
 	{
 	
 
-		if (listBlockQueue.Count > 0 && currSelectionBlock == null) {
+		if (listBlockQueue.Count > 0 && currSelectionBlock == null &&!lockSelectBlock) {
 			Vector3 pointClick = GetTouchPos ();
 			Debug.Log ("pointClick: " + pointClick);
 			for (int i =0; i<listBlockQueue.Count; i++) {
 				if (listBlockQueue [i].CheckPointIn (pointClick)) {
 					currSelectionBlock = listBlockQueue [i];
 					currSelectionBlock.SetSelection (GetTouchPos ());
-
+					lockSelectBlock = true;
 					StartCoroutine (UpdateBlockSelection (currSelectionBlock));
 					break;
 				}
@@ -94,23 +95,22 @@ public class Game : MonoBehaviour
 					yTag = 10;
 				Debug.Log ("pos Tag: " + xTag + ", " + yTag);
 				bool isTag = true;
-				if (xTag+currSelectionBlock.w>10 || yTag+currSelectionBlock.h>10)
-				{
+				if (xTag + currSelectionBlock.w > 10 || yTag + currSelectionBlock.h > 10) {
 					isTag = false;
-				}else
-				{
-				for (int i = xTag; i<xTag+currSelectionBlock.w && i<10; i++) {
-					for (int j =yTag; j<yTag+currSelectionBlock.h && j<10; j++) {
-						if (currSelectionBlock.array [i - xTag, j - yTag] != 0 && board [i, j] != -1) {
-							isTag = false;
+				} else {
+					for (int i = xTag; i<xTag+currSelectionBlock.w && i<10; i++) {
+						for (int j =yTag; j<yTag+currSelectionBlock.h && j<10; j++) {
+							if (currSelectionBlock.array [i - xTag, j - yTag] != 0 && board [i, j] != -1) {
+								isTag = false;
+							}
 						}
 					}
-				}
 				}
 
 				if (!isTag) {
 					currSelectionBlock.SetUnSelection ();
 					currSelectionBlock = null;
+					lockSelectBlock = false;
 				} else {
 					Vector3 pos1 = new Vector3 (botleftBoardPos.x + Config.CELL_SIZE * (xTag + 0.5f), botleftBoardPos.y + Config.CELL_SIZE * (yTag + 0.5f), currSelectionBlock.transform.position.z);
 					currSelectionBlock.TagToPos (pos1);
@@ -120,6 +120,7 @@ public class Game : MonoBehaviour
 			} else {
 				currSelectionBlock.SetUnSelection ();
 				currSelectionBlock = null;
+				lockSelectBlock = false;
 			}
 
 
@@ -248,27 +249,25 @@ public class Game : MonoBehaviour
 	public void CheckEndGame ()
 	{
 		bool endGame = true;
+		Debug.Log("checkEndGame");
 		foreach (Block block in listBlockQueue) {
-
+			Debug.Log("check block: " + block.name);
 			for (int xTag =0; xTag<10; xTag++) {
 				for (int yTag = 0; yTag<10; yTag++) {
 		
 
 					bool isTag = true;
-					if (xTag+block.w>10 || yTag+block.h>10)
-					{
-						isTag
-							 = false;
-					}else
-					{
-					for (int i = xTag; i<xTag+block.w && i<10; i++) {
-						for (int j =yTag; j<yTag+block.h && j<10; j++) {
+					if (xTag + block.w > 10 || yTag + block.h > 10) {
+						isTag = false;
+					} else {
+						for (int i = xTag; i<xTag+block.w && i<10; i++) {
+							for (int j =yTag; j<yTag+block.h && j<10; j++) {
 
-							if (block.array [i - xTag, j - yTag] != 0 && board [i, j] != -1) {
-								isTag = false;
+								if (block.array [i - xTag, j - yTag] != 0 && board [i, j] != -1) {
+									isTag = false;
+								}
 							}
 						}
-					}
 					}
 				
 					if (isTag) {
@@ -281,6 +280,7 @@ public class Game : MonoBehaviour
 		if (endGame) {
 			Application.LoadLevel (Application.loadedLevel);
 		}
+		lockSelectBlock = false;
 	}
 
 	IEnumerator MoveBlockQueueToScreen ()

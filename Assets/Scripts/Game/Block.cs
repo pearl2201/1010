@@ -40,6 +40,7 @@ public class Block : MonoBehaviour
 	{
 		this.type = type;
 		this.queueBlockIndex = queueBlockIndex;
+		gameObject.name = " block: " + queueBlockIndex;
 		this.originCenterBlockPos = new Vector3 ((queueBlockIndex - 1) * Config.SCREEN_WIDTH / 4, -6f, 0);
 		this.array = Config.GetArrayBlockFromType (type);
 		this.w = array.GetLength (0);
