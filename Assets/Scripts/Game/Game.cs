@@ -94,12 +94,18 @@ public class Game : MonoBehaviour
 					yTag = 10;
 				Debug.Log ("pos Tag: " + xTag + ", " + yTag);
 				bool isTag = true;
-				for (int i = xTag; i<xTag+currSelectionBlock.w; i++) {
-					for (int j =yTag; j<yTag+currSelectionBlock.h; j++) {
+				if (xTag+currSelectionBlock.w>10 || yTag+currSelectionBlock.h>10)
+				{
+					isTag = false;
+				}else
+				{
+				for (int i = xTag; i<xTag+currSelectionBlock.w && i<10; i++) {
+					for (int j =yTag; j<yTag+currSelectionBlock.h && j<10; j++) {
 						if (currSelectionBlock.array [i - xTag, j - yTag] != 0 && board [i, j] != -1) {
 							isTag = false;
 						}
 					}
+				}
 				}
 
 				if (!isTag) {
@@ -247,14 +253,22 @@ public class Game : MonoBehaviour
 			for (int xTag =0; xTag<10; xTag++) {
 				for (int yTag = 0; yTag<10; yTag++) {
 		
-					Debug.Log ("pos Tag: " + xTag + ", " + yTag);
+
 					bool isTag = true;
-					for (int i = xTag; i<xTag+block.w; i++) {
-						for (int j =yTag; j<yTag+block.h; j++) {
+					if (xTag+block.w>10 || yTag+block.h>10)
+					{
+						isTag
+							 = false;
+					}else
+					{
+					for (int i = xTag; i<xTag+block.w && i<10; i++) {
+						for (int j =yTag; j<yTag+block.h && j<10; j++) {
+
 							if (block.array [i - xTag, j - yTag] != 0 && board [i, j] != -1) {
 								isTag = false;
 							}
 						}
+					}
 					}
 				
 					if (isTag) {
