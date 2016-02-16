@@ -66,7 +66,7 @@ public class Block : MonoBehaviour
 				go.transform.parent = transform;
 
 				if (sprite != null) {
-					sprite.SetSprite ("1_" + type);
+					sprite.SetSprite ("1_" + (type+1));
 					listSprite [j * w + i] = sprite;
 				}
 

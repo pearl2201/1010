@@ -37,7 +37,7 @@ public class Game : MonoBehaviour
 			go.transform.parent = parentsBlockQueue;
 			Block blockScript = go.GetComponent<Block> ();
 			if (blockScript != null) {
-				int type = Random.Range (1, 11);
+				int type = Random.Range (0, 11);
 
 				blockScript.mainGameScript = this;
 				blockScript.setType (type, i);
@@ -136,7 +136,7 @@ public class Game : MonoBehaviour
 
 			for (int i = xTag; i<xTag+currSelectionBlock.w; i++) {
 				for (int j =yTag; j<yTag+currSelectionBlock.h; j++) {
-					spriteBoard [i, j].SetSprite ("1_" + currSelectionBlock.type);
+					spriteBoard [i, j].SetSprite ("1_" + (currSelectionBlock.type+1));
 					spriteBoard [i, j].gameObject.SetActive (true);
 					board [i, j] = currSelectionBlock.type;
 				}
