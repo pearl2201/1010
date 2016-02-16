@@ -1,0 +1,11 @@
+﻿# =============== #
+# Unity generated #
+# =============== #
+/Temp
+/obj
+/Library
+*.csproj
+*.unityproj
+*.sln
+*.userprefs
+/ProjectSettings/ProjectSettings.asset
