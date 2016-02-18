@@ -10,7 +10,8 @@ public class Config  {
 
 	public static float SCREEN_HEIGHT = 16f ;
 	public static float SCREEN_WIDTH = 9.6f;
-
+	public static bool isSoundOn = false;
+	public static bool isMusicOn = false;
 	public static Vector2 ConvertCellPositionWorldToBoard(Vector3 positionW)
 	{
 		return new Vector2(0,0);
