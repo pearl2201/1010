@@ -61,15 +61,16 @@ public class Block : MonoBehaviour
 
 		for (int i =0; i< array.GetLength(0); i++) {
 			for (int j =0; j<array.GetLength(1); j++) {
-				GameObject go = Instantiate (spriteModel) as GameObject;
-				tk2dSprite sprite = go.GetComponent<tk2dSprite> ();
-				go.transform.parent = transform;
+				if (array [i, j] == 1) {
+					GameObject go = Instantiate (spriteModel) as GameObject;
+					tk2dSprite sprite = go.GetComponent<tk2dSprite> ();
+					go.transform.parent = transform;
 
-				if (sprite != null) {
-					sprite.SetSprite ("1_" + (type+1));
-					listSprite [j * w + i] = sprite;
+					if (sprite != null) {
+						sprite.SetSprite ("1_" + ((type % 12 + 1)));
+						listSprite [j * w + i] = sprite;
+					}
 				}
-
 
 			}
 		}
@@ -209,12 +210,12 @@ public class Block : MonoBehaviour
 		return bounds.Contains (point);
 	}
 
-	public void TagToPos(Vector3 pos)
+	public void TagToPos (Vector3 pos)
 	{
-		StartCoroutine(UpdateTagPos(pos));
+		StartCoroutine (UpdateTagPos (pos));
 	}
 
-	IEnumerator UpdateTagPos(Vector3 pos)
+	IEnumerator UpdateTagPos (Vector3 pos)
 	{
 		float d = 0.05f;
 		float p = 0;
@@ -244,7 +245,7 @@ public class Block : MonoBehaviour
 			yield return null;
 		}
 
-		mainGameScript.FinishTagPos();
+		mainGameScript.FinishTagPos ();
 
 	}
 

@@ -37,7 +37,7 @@ public class Game : MonoBehaviour
 			go.transform.parent = parentsBlockQueue;
 			Block blockScript = go.GetComponent<Block> ();
 			if (blockScript != null) {
-				int type = Random.Range (0, 11);
+				int type = Random.Range (0, 19);
 
 				blockScript.mainGameScript = this;
 				blockScript.setType (type, i);
@@ -53,7 +53,7 @@ public class Game : MonoBehaviour
 	{
 	
 
-		if (listBlockQueue.Count > 0 && currSelectionBlock == null &&!lockSelectBlock) {
+		if (listBlockQueue.Count > 0 && currSelectionBlock == null && !lockSelectBlock) {
 			Vector3 pointClick = GetTouchPos ();
 			Debug.Log ("pointClick: " + pointClick);
 			for (int i =0; i<listBlockQueue.Count; i++) {
@@ -136,9 +136,11 @@ public class Game : MonoBehaviour
 
 			for (int i = xTag; i<xTag+currSelectionBlock.w; i++) {
 				for (int j =yTag; j<yTag+currSelectionBlock.h; j++) {
-					spriteBoard [i, j].SetSprite ("1_" + (currSelectionBlock.type+1));
-					spriteBoard [i, j].gameObject.SetActive (true);
-					board [i, j] = currSelectionBlock.type;
+					if (currSelectionBlock.array [i - xTag, j - yTag] == 1) {
+						spriteBoard [i, j].SetSprite ("1_" + (currSelectionBlock.type % 12 + 1));
+						spriteBoard [i, j].gameObject.SetActive (true);
+						board [i, j] = currSelectionBlock.type;
+					}
 				}
 			}
 		}
@@ -249,9 +251,9 @@ public class Game : MonoBehaviour
 	public void CheckEndGame ()
 	{
 		bool endGame = true;
-		Debug.Log("checkEndGame");
+		Debug.Log ("checkEndGame");
 		foreach (Block block in listBlockQueue) {
-			Debug.Log("check block: " + block.name);
+			Debug.Log ("check block: " + block.name);
 			for (int xTag =0; xTag<10; xTag++) {
 				for (int yTag = 0; yTag<10; yTag++) {
 		

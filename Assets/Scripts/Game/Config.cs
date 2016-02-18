@@ -31,6 +31,14 @@ public class Config  {
 	public static int TYPE_BLOCK_5_O_NGANG = 8;
 	public static int TYPE_BLOCK_O_VUONG_2X2 =9;
 	public static int TYPE_BLOCK_O_VUONG_3X3 = 10;
+	public static int TYPE_BLOCK_L2_1 = 11;
+	public static int TYPE_BLOCK_L2_2 = 12;
+	public static int TYPE_BLOCK_L2_3 = 13;
+	public static int TYPE_BLOCK_L2_4 = 14;
+	public static int TYPE_BLOCK_L3_1 = 15;
+	public static int TYPE_BLOCK_L3_2 = 16;
+	public static int TYPE_BLOCK_L3_3 = 17;
+	public static int TYPE_BLOCK_L3_4 = 18;
 
 	public static int[,] ARRAY_BLOCK_O_VUONG_1X1= new int[1,1]{{1}};
 	public static int[,] ARRAY_BLOCK_2_O_DOC = new int[1,2]{{1,1}};
@@ -42,7 +50,15 @@ public class Config  {
 	public static int[,] ARRAY_BLOCK_5_O_DOC = new int[1,5]{{1,1,1,1,1}};
 	public static int[,] ARRAY_BLOCK_5_O_NGANG = new int[5,1]{{1},{1},{1},{1},{1}};
 	public static int[,] ARRAY_BLOCK_O_VUONG_2X2 = new int[2,2]{{1,1},{1,1}};
+	public static int[,] ARRAY_BLOCK_L2_1 = new int[2,2]{{1,0},{1,1}};
+	public static int[,] ARRAY_BLOCK_L2_2 = new int[2,2]{{0,1},{1,1}};
+	public static int[,] ARRAY_BLOCK_L2_3 = new int[2,2]{{1,1},{0,1}};
+	public static int[,] ARRAY_BLOCK_L2_4 = new int[2,2]{{1,1},{1,0}};
 	public static int[,] ARRAY_BLOCK_O_VUONG_3X3 = new int[3,3]{{1,1,1},{1,1,1},{1,1,1}};
+	public static int[,]  ARRAY_BLOCK_L3_1 = new int[3,3]{{0,0,1},{0,0,1},{1,1,1}};
+	public static int[,]  ARRAY_BLOCK_L3_2 = new int[3,3]{{1,0,0},{1,0,0},{1,1,1}};
+	public static int[,]  ARRAY_BLOCK_L3_3 = new int[3,3]{{1,1,1},{0,0,1},{0,0,1}};
+	public static int[,]  ARRAY_BLOCK_L3_4 = new int[3,3]{{1,1,1},{1,0,0},{1,0,0}};
 
 	public static int[,] GetArrayBlockFromType(int typeB)
 	{
@@ -68,6 +84,22 @@ public class Config  {
 			return ARRAY_BLOCK_O_VUONG_2X2;
 		} else if (typeB == TYPE_BLOCK_O_VUONG_3X3) {
 			return ARRAY_BLOCK_O_VUONG_3X3;
+		} else if (typeB == TYPE_BLOCK_L2_1) {
+			return ARRAY_BLOCK_L2_1;
+		} else if (typeB == TYPE_BLOCK_L2_2) {
+			return ARRAY_BLOCK_L2_2;
+		} else if (typeB == TYPE_BLOCK_L2_3) {
+			return ARRAY_BLOCK_L2_4;
+		} else if (typeB == TYPE_BLOCK_L2_4) {
+			return ARRAY_BLOCK_L2_4;
+		} else if (typeB == TYPE_BLOCK_L3_1) {
+			return ARRAY_BLOCK_L3_1;
+		} else if (typeB == TYPE_BLOCK_L3_2) {
+			return ARRAY_BLOCK_L3_2;
+		} else if (typeB == TYPE_BLOCK_L3_3) {
+			return ARRAY_BLOCK_L3_3;
+		} else if (typeB == TYPE_BLOCK_L3_4) {
+			return ARRAY_BLOCK_L3_4;
 		} 
 		return null;
 	}
