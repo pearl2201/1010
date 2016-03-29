@@ -133,16 +133,18 @@ public class Game : MonoBehaviour
 		if (currSelectionBlock != null) {
 			int xTag = currSelectionBlock.xTag;
 			int yTag = currSelectionBlock.yTag;
-
+			int noBlockAddScore = 0;
 			for (int i = xTag; i<xTag+currSelectionBlock.w; i++) {
 				for (int j =yTag; j<yTag+currSelectionBlock.h; j++) {
 					if (currSelectionBlock.array [i - xTag, j - yTag] == 1) {
 						spriteBoard [i, j].SetSprite ("1_" + (currSelectionBlock.type % 12 + 1));
 						spriteBoard [i, j].gameObject.SetActive (true);
 						board [i, j] = currSelectionBlock.type;
+						noBlockAddScore ++;
 					}
 				}
 			}
+			AddScore(noBlockAddScore);
 		}
 
 		for (int i =0; i<currSelectionBlock.listSprite.Length; i++) {
@@ -192,6 +194,10 @@ public class Game : MonoBehaviour
 		StartCoroutine (DestroyRowCol (listRow, listCol));
 	}
 
+	public void AddScore(int noBlockAdd)
+	{
+
+	}
 	IEnumerator DestroyRowCol (List<int> listRow, List<int> listCol)
 	{
 		List<tk2dSprite> listAct = new List<tk2dSprite> ();

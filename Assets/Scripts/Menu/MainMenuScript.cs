@@ -41,6 +41,11 @@ public class MainMenuScript : MonoBehaviour
 
 	}
 
+	public void ChangeTheme()
+	{
+
+	}
+
 
 }
 
